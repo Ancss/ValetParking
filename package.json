@@ -1,0 +1,19 @@
+{
+  "name": "parking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ancss/parking.git"
+  },
+  "keywords": [],
+  "author": "Ancss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ancss/parking/issues"
+  },
+  "homepage": "https://github.com/Ancss/parking#readme"
+}
