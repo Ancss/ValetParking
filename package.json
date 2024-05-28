@@ -2,7 +2,17 @@
   "name": "parking",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "libs/*"
+    ],
+    "nohoist": [
+      "**/@nestjs",
+      "**/@nestjs/**"
+    ]
+  },
   "scripts": {
     "format": "prettier  \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
     "format:check": "pnpm format --check",
