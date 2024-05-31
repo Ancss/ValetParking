@@ -5,14 +5,13 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
-
 
 model User {
     uid       String   @id
@@ -198,7 +197,6 @@ model Booking {
 }
 
 model ValetAssignment {
-    bookingId Int      @id
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
@@ -209,6 +207,7 @@ model ValetAssignment {
 
     pickupValetId String?
     returnValetId String?
+    bookingId     Int     @id
     PickupValet   Valet?  @relation("PickupValet", fields: [pickupValetId], references: [uid])
     ReturnValet   Valet?  @relation("ReturnValet", fields: [returnValetId], references: [uid])
     Booking       Booking @relation(fields: [bookingId], references: [id])

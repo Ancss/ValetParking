@@ -3,25 +3,83 @@
 # ------------------------------------------------------
 
 type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  image: String
+  name: String
+  admin: Admin
+  manager: Manager
+  valet: Valet
+  customer: Customer
+}
+
+type AuthProvider {
+  type: AuthProviderType!
+}
+
+enum AuthProviderType {
+  GOOGLE
+  CREDENTIALS
+}
+
+type LoginOutput {
+  user: User!
+}
+
+type Admin {
+  uid: String!
+}
+
+type Manager {
+  displayName: String
+}
+
+type Valet {
+  image: String
+  companyId: Float
+}
+
+type Customer {
+  displayName: String
 }
 
 type Query {
-  users: [User!]!
-  user(uid: Int!): User!
+  whoami: User!
+  users(distinct: [UserScalarFieldEnum!]): [User!]!
+  user: User!
+  getAuthProvider(uid: String!): AuthProvider
+}
+
+enum UserScalarFieldEnum {
+  uid
+  createdAt
+  updatedAt
+  name
+  image
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+  registerWithCredentials(registerWithCredentialsInput: RegisterWithCredentialsInput!): User!
+  registerWithProvider(registerWithProviderInput: RegisterWithProviderInput!): User!
+  login(loginInput: LoginInput!): LoginOutput!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(uid: Int!): User!
+  removeUser: User!
 }
 
-input CreateUserInput {
-  uid: String!
+input RegisterWithCredentialsInput {
+  email: String!
+  password: String!
+}
+
+input RegisterWithProviderInput {
+  image: String
+  name: String
+  type: AuthProviderType!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 input UpdateUserInput {
-  uid: String!
+  uid: String
 }

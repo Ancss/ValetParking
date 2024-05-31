@@ -2,16 +2,16 @@ version: '3.8'
 
 services:
   db:
-    container_name: parking_db
+    container_name: ParkFinder_db
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - 2010:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: password
     volumes:
-      - db_data_parking:/var/lib/postgresql/data
+      - db_data_ParkFinder:/var/lib/postgresql/data
 volumes:
-  db_data_parking:
+  db_data_ParkFinder:
