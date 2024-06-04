@@ -1,43 +1,41 @@
 {
-  "name": "parking",
+  "name": "ValetParking",
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "apps/*",
-      "libs/*"
-    ],
-    "nohoist": [
-      "**/@nestjs",
-      "**/@nestjs/**"
-    ]
-  },
   "scripts": {
     "format": "prettier  \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
-    "format:check": "pnpm format --check",
-    "format:write": "pnpm format --write",
-    "tsc": "pnpm --parallel -r run tsc",
-    "lint": "pnpm --parallel -r run lint",
-    "build": "pnpm --parallel -r run build",
-    "validate": "pnpm format:write && pnpm tsc && pnpm lint ",
-    "prepare": "husky install"
+    "format:check": "yarn format --check",
+    "format:write": "yarn format --write",
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "tsc": "tsc --noEmit",
+    "validate": "yarn format:write && yarn tsc && yarn lint && yarn build",
+    "prepare": "husky install",
+    "clean": "rimraf \"**/rest\" \"**/graphql\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ancss/parking.git"
+    "url": "git+https://github.com/Ancss/ValetParking.git"
   },
   "keywords": [],
   "author": "Ancss",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ancss/parking/issues"
+    "url": "https://github.com/Ancss/ValetParking/issues"
   },
-  "homepage": "https://github.com/Ancss/parking#readme",
+  "homepage": "https://github.com/Ancss/ValetParking#readme",
   "devDependencies": {
-    "@types/unist": "^3.0.2",
     "husky": "^8.0.0",
+    "nx": "18.3.5",
     "prettier": "^3.0.0",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@nestjs/graphql": "^12.1.1",
+    "@types/unist": "^3.0.2",
+    "next-auth": "^4.24.7"
   }
 }
