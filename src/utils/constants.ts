@@ -8,12 +8,12 @@ export const initialViewState = {
 
 export const majorCitiesLocationInfo: LocationInfo[] = [
   {
-    placeName: 'Chennai, Tamil Nadu, India',
-    latLng: [13.0827, 80.2707],
-  },
-  {
     placeName: 'New York, New York, United States',
     latLng: [40.7128, -74.006],
+  },
+  {
+    placeName: 'Beijing, China',
+    latLng: [39.9042, 116.4074],
   },
   {
     placeName: 'London, Greater London, England, United Kingdom',
@@ -42,10 +42,6 @@ export const majorCitiesLocationInfo: LocationInfo[] = [
   {
     placeName: 'Moscow, Russia',
     latLng: [55.7558, 37.6176],
-  },
-  {
-    placeName: 'Beijing, China',
-    latLng: [39.9042, 116.4074],
   },
 ]
 
