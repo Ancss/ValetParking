@@ -1,6 +1,5 @@
 import { TypedDocumentNode } from '@apollo/client/core/types'
 import { print } from 'graphql'
-import axios from 'axios'
 export interface FetchResult<TData> {
   data?: TData
   error?: string
