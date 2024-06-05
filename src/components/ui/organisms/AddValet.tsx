@@ -1,5 +1,5 @@
 import { useFormCreateValet } from '@/components/forms/createValet'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../atoms/Button'
 import { Dialog } from '../atoms/Dialog'
 import { Form } from '../atoms/Form'
@@ -14,6 +14,7 @@ import {
   namedOperations,
 } from '@/components/network/gql/generated'
 import { toast } from '../molecules/Toast'
+import { useSession } from 'next-auth/react'
 
 export const AddValet = () => {
   const {
@@ -23,6 +24,7 @@ export const AddValet = () => {
     watch,
     reset,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useFormCreateValet()
   const [open, setOpen] = useState(false)
@@ -37,7 +39,13 @@ export const AddValet = () => {
     awaitRefetchQueries: true,
     refetchQueries: [namedOperations.Query.companyValets],
   })
-
+  const session = useSession()
+  const uid = session.data?.user?.uid
+  useEffect(() => {
+    if (uid) {
+      setValue('uid', uid)
+    }
+  }, [uid])
   const { uploading, upload } = useCloudinaryUpload()
 
   return (
@@ -58,7 +66,11 @@ export const AddValet = () => {
           })}
         >
           <HtmlLabel title="UID" error={errors.uid?.message}>
-            <HtmlInput placeholder="uid of the valet" {...register('uid')} />
+            <HtmlInput
+              placeholder="uid of the valet"
+              readOnly
+              {...register('uid')}
+            />
           </HtmlLabel>
           <HtmlLabel title="Display Name" error={errors.displayName?.message}>
             <HtmlInput
