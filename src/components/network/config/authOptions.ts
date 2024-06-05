@@ -11,7 +11,7 @@ import { fetchGraphQL } from '../fetch'
 import * as jwt from 'jsonwebtoken'
 import { JWT } from 'next-auth/jwt'
 
-const MAX_AGE = 1 * 24 * 60 * 60 * 1000 // 1 day in seconds
+const MAX_AGE = 1 * 24 * 60 * 60 // 1 day in seconds
 
 const secureCookies = process.env.NEXTAUTH_URL?.startsWith('https://')
 const hostName = new URL(process.env.NEXTAUTH_URL || '').hostname
@@ -106,6 +106,8 @@ export const authOptions: NextAuthOptions = {
     // Custom JWT decoding function
     async decode({ token, secret }): Promise<JWT | null> {
       console.log('decode token', token)
+      console.log('decode secret', secret)
+      console.log('decode process.env.JWT_SECRET', process.env.JWT_SECRET)
       // Implement custom JWT decoding logic
       if (!token) {
         throw new Error('Token is undefined')
