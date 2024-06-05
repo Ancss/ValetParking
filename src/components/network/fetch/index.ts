@@ -1,6 +1,6 @@
 import { TypedDocumentNode } from '@apollo/client/core/types'
 import { print } from 'graphql'
-
+import axios from 'axios'
 export interface FetchResult<TData> {
   data?: TData
   error?: string
@@ -29,6 +29,11 @@ export async function fetchGraphQL<TData, V>({
   token,
 }: GraphqlRequestOptions<TData, V>): Promise<FetchResult<TData>> {
   const query = print(document)
+  console.log(
+    'process.env.NEXT_PUBLIC_API_URL',
+    process.env.NEXT_PUBLIC_API_URL + '/graphql',
+    { token, query, variables },
+  )
 
   return await fetch(process.env.NEXT_PUBLIC_API_URL + '/graphql', {
     method: 'POST',
@@ -40,6 +45,7 @@ export async function fetchGraphQL<TData, V>({
     ...config,
   }).then(async (res) => {
     const { data, errors } = await res.json()
+    console.log('data', data, 'errors', errors)
     if (errors) {
       console.log('Error', JSON.stringify(errors))
       return { error: JSON.stringify(errors[0].message) }

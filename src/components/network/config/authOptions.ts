@@ -11,7 +11,7 @@ import { fetchGraphQL } from '../fetch'
 import * as jwt from 'jsonwebtoken'
 import { JWT } from 'next-auth/jwt'
 
-const MAX_AGE = 1 * 24 * 60 * 60
+const MAX_AGE = 1 * 24 * 60 * 60 * 1000 // 1 day in seconds
 
 const secureCookies = process.env.NEXTAUTH_URL?.startsWith('https://')
 const hostName = new URL(process.env.NEXTAUTH_URL || '').hostname
@@ -45,12 +45,13 @@ export const authOptions: NextAuthOptions = {
         }
         const { email, password } = credentials
 
+        console.log('authorize credentials', credentials)
         try {
           const { data, error } = await fetchGraphQL({
             document: LoginDocument,
             variables: { loginInput: { email, password } },
           })
-
+          console.log('authorize data', data)
           if (!data?.login.token || error) {
             throw new Error(
               'Authentication failed: Invalid credentials or user not found',
@@ -61,8 +62,10 @@ export const authOptions: NextAuthOptions = {
           const name = data.login.user.name
 
           return { id: uid, name, image, email }
-        } catch (error) {}
-        return null
+        } catch (error) {
+          console.log('authorize error', error)
+          throw new Error('Authentication failed')
+        }
       },
     }),
   ],
@@ -85,6 +88,8 @@ export const authOptions: NextAuthOptions = {
       if (!token) {
         throw new Error('Token is undefined')
       }
+      console.log('encode token', token)
+      console.log('encode secret', secret)
       const { sub, ...tokenProps } = token
       // Get the current date in seconds since the epoch
       const nowInSeconds = Math.floor(Date.now() / 1000)
@@ -100,6 +105,7 @@ export const authOptions: NextAuthOptions = {
     },
     // Custom JWT decoding function
     async decode({ token, secret }): Promise<JWT | null> {
+      console.log('decode token', token)
       // Implement custom JWT decoding logic
       if (!token) {
         throw new Error('Token is undefined')
@@ -133,6 +139,8 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // Sign-in callback
     async signIn({ user, account }) {
+      console.log('signIn user', user)
+      console.log('signIn account', account)
       // Implement sign-in logic, e.g., create user in database
       if (account?.provider === 'google') {
         const { id, name, image } = user
@@ -163,6 +171,8 @@ export const authOptions: NextAuthOptions = {
     },
     // Session callback
     async session({ token, session }) {
+      console.log('session token', token)
+      console.log('session session', session)
       // Customize session object based on token data
       if (token) {
         session.user = {

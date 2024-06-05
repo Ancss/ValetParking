@@ -1,14 +1,14 @@
 import { signIn } from 'next-auth/react'
-
+import { IconBrandGoogle } from '@tabler/icons-react'
 export const GoogleButton = () => {
   return (
     <button
       onClick={() => {
         signIn('google', { callbackUrl: '/' })
       }}
-      className="text-lg hover:shadow-lg transition-shadow flex items-center justify-center w-8 h-8 border border-[#ea4335] rounded-full"
+      className="text-lg bg-white text-gray-700 hover:shadow-lg px-4 py-2 transition-shadow flex items-center justify-center h-8 border  rounded-md"
     >
-      G
+      Connect with Google
     </button>
   )
 }
