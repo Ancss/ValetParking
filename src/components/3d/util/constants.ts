@@ -1,4 +1,4 @@
-export const WORLD_DURATION = 27
+export const WORLD_DURATION = 25
 
 export const WORLD_START = -500
 export const WORLD_END = 400

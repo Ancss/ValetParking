@@ -19,7 +19,9 @@ export const Spawner = ({
   children,
   duration = WORLD_DURATION,
 }: SpawnerProps) => {
-  const [elements, setElements] = useState<Array<SpawnedElement>>([])
+  const [elements, setElements] = useState<Array<SpawnedElement>>([
+    { id: 0, progress: 0 },
+  ])
   const lastSpawnTime = useRef<number>(Date.now())
 
   useFrame((_, delta) => {

@@ -41,7 +41,7 @@ export const CarScene = ({
           fov={45}
           near={0.1}
           far={1000}
-          position={[40, 200, 40]}
+          position={[40, 200, 80]}
           rotation={[radians(60), 0, 0]}
         />
       )}
@@ -71,7 +71,7 @@ export const CarScene = ({
       {/* Cars */}
 
       <Spawner
-        spawnInterval={8.2}
+        spawnInterval={3.2}
         duration={WORLD_DURATION - 6}
         startPosition={new THREE.Vector3(WORLD_START, 0, -10)}
         endPosition={new THREE.Vector3(WORLD_END, 0, -10)}
