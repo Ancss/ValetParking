@@ -64,7 +64,7 @@ export const BookSlotPopup = ({
       <Form
         onSubmit={handleSubmit(async (data) => {
           if (!uid) {
-            alert('You are not logged in.')
+            toast('You are not logged in.')
             return
           }
           const bookingData: CreateBookingInput = {

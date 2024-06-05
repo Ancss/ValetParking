@@ -9,6 +9,7 @@ import { HtmlLabel } from '../atoms/HtmlLabel'
 import { HtmlInput } from '../atoms/HtmlInput'
 import { Button } from '../atoms/Button'
 import Link from 'next/link'
+import { toast } from '../molecules/Toast'
 
 export interface ISignupFormProps {
   className?: string
@@ -35,11 +36,11 @@ export const RegisterForm = ({ className, role }: ISignupFormProps) => {
         })
 
         if (errors) {
-          alert(errors)
+          toast(JSON.stringify(errors))
         }
 
         if (data) {
-          alert(`User ${data.registerWithCredentials.uid} created. 🎉`)
+          toast(`User ${data.registerWithCredentials.uid} created. 🎉`)
           signIn('credentials', {
             email: formData.email,
             password: formData.password,

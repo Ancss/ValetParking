@@ -19,7 +19,10 @@ export const GarageCard = ({ garage }: IGarageCardProps) => {
             <h3 className="font-semibold ">{garage.displayName}</h3>
             <Link
               className="text-sm underline underline-offset-4"
-              href={{ pathname: 'bookings', query: { garageId: garage.id } }}
+              href={{
+                pathname: 'ListGarageBookings',
+                query: { garageId: garage.id },
+              }}
             >
               Bookings
             </Link>

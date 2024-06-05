@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { toast } from '../molecules/Toast'
 
 export interface ILoginFormProps {
   className?: string
@@ -39,7 +40,7 @@ export const LoginForm = ({ className }: ILoginFormProps) => {
           replace('/')
         }
         if (result?.error) {
-          alert('Login failed. Try again.')
+          toast('Login failed. Try again.')
         }
       })}
     >
