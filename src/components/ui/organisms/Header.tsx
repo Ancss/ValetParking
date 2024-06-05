@@ -11,16 +11,62 @@ import { Button } from '../atoms/Button'
 import { useDialogState } from '@/utils/hooks/dialog'
 import { NavSidebar } from './NavSidebar'
 import { Menus } from './Menus'
+import { useQuery } from '@apollo/client'
+import {
+  AdminMeDocument,
+  MyCompanyDocument,
+  ValetMeDocument,
+} from '@/components/network/gql/generated'
+import { useEffect, useState } from 'react'
 
 export type IHeaderProps = {
   type?: Role
-  menuItems: MenuItem[]
+  // menuItems: MenuItem[]
 } & BaseComponent
 
-export const Header = ({ type, menuItems }: IHeaderProps) => {
+export const Header = ({ type }: IHeaderProps) => {
   const session = useSession()
   const uid = session?.data?.user?.uid
   let [open, setOpen] = useDialogState(false)
+  const { data: myCompany } = useQuery(MyCompanyDocument)
+  const { data: admin } = useQuery(AdminMeDocument)
+  const { data: valetMe } = useQuery(ValetMeDocument)
+  const [menuItems, setMenuItem] = useState<MenuItem[]>([
+    { label: 'Search', href: '/search' },
+    { label: 'Bookings', href: '/listCustomerBookings' },
+  ])
+
+  useEffect(() => {
+    if (admin?.adminMe?.uid) {
+      setMenuItem((prevMenuItems) => {
+        return [
+          ...prevMenuItems,
+          { label: 'Garages', href: '/' },
+          { label: 'Admins', href: '/manageAdmins' },
+        ]
+      })
+    }
+  }, [admin])
+
+  useEffect(() => {
+    if (myCompany?.myCompany) {
+      setMenuItem((prevMenuItems) => {
+        return [
+          ...prevMenuItems,
+          { label: 'New Garage', href: '/new-garage' },
+          { label: 'Valets', href: '/valets' },
+        ]
+      })
+    }
+  }, [myCompany])
+
+  useEffect(() => {
+    if (valetMe?.valetMe?.uid) {
+      setMenuItem((prevMenuItems) => {
+        return [...prevMenuItems, { label: 'My Trips', href: '/my-trips' }]
+      })
+    }
+  }, [valetMe])
 
   return (
     <header>
