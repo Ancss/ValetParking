@@ -1,5 +1,6 @@
 'use client'
 import { CarScene } from '@/components/3d/scenes/CarScene'
+
 import { IconSearch } from '@tabler/icons-react'
 import Link from 'next/link'
 

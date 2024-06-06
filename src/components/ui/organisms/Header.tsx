@@ -34,39 +34,37 @@ export const Header = ({ type }: IHeaderProps) => {
   const [menuItems, setMenuItem] = useState<MenuItem[]>([
     { label: 'Search', href: '/search' },
     { label: 'Bookings', href: '/listCustomerBookings' },
+    // { label: 'Admins', href: '/manageAdmins' },
+    { label: 'Garage', href: '/garages' },
+    { label: 'New Garage', href: '/new-garage' },
+    { label: 'Garage Booking', href: '/listGarageBookings' },
+    { label: 'Valets', href: '/valets' },
+    { label: 'My Trips', href: '/my-trips' },
   ])
 
-  useEffect(() => {
-    if (admin?.adminMe?.uid) {
-      setMenuItem((prevMenuItems) => {
-        return [
-          ...prevMenuItems,
-          { label: 'Garages', href: '/' },
-          { label: 'Admins', href: '/manageAdmins' },
-        ]
-      })
-    }
-  }, [admin])
+  // useEffect(() => {
+  //   if (admin?.adminMe?.uid) {
+  //     setMenuItem((prevMenuItems) => {
+  //       return [...prevMenuItems]
+  //     })
+  //   }
+  // }, [admin])
 
-  useEffect(() => {
-    if (myCompany?.myCompany) {
-      setMenuItem((prevMenuItems) => {
-        return [
-          ...prevMenuItems,
-          { label: 'New Garage', href: '/new-garage' },
-          { label: 'Valets', href: '/valets' },
-        ]
-      })
-    }
-  }, [myCompany])
+  // useEffect(() => {
+  //   if (myCompany?.myCompany) {
+  //     setMenuItem((prevMenuItems) => {
+  //       return [...prevMenuItems]
+  //     })
+  //   }
+  // }, [myCompany])
 
-  useEffect(() => {
-    if (valetMe?.valetMe?.uid) {
-      setMenuItem((prevMenuItems) => {
-        return [...prevMenuItems, { label: 'My Trips', href: '/my-trips' }]
-      })
-    }
-  }, [valetMe])
+  // useEffect(() => {
+  //   if (valetMe?.valetMe?.uid) {
+  //     setMenuItem((prevMenuItems) => {
+  //       return [...prevMenuItems]
+  //     })
+  //   }
+  // }, [valetMe])
 
   return (
     <header>

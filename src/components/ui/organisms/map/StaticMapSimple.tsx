@@ -12,8 +12,8 @@ export const StaticMapSimple = ({
   if (!position) {
     return <div className="w-full bg-gray-100 shadow-xl aspect-square" />
   }
-
-  const url = `https://api.mapbox.com/styles/mapbox/streets-v12/static/pin-s(${position.lng},${position.lat})/${position.lng},${position.lat},9,0/600x600?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`
+  console.log(position)
+  const url = `https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/[${position.lng},${position.lat},${position.lng + 0.05},${position.lat + 0.05}]/600x600?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`
 
   return (
     <Image

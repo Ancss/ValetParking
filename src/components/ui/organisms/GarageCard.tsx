@@ -20,7 +20,7 @@ export const GarageCard = ({ garage }: IGarageCardProps) => {
             <Link
               className="text-sm underline underline-offset-4"
               href={{
-                pathname: 'ListGarageBookings',
+                pathname: 'listGarageBookings',
                 query: { garageId: garage.id },
               }}
             >

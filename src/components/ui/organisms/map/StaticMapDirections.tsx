@@ -37,15 +37,7 @@ export const StaticMapDirections = ({
 
   const paddingString = padding.join(',')
 
-  const url = `https://api.mapbox.com/styles/mapbox/streets-v12/static/pin-s-a+000(${
-    start.lng
-  },${start.lat}),pin-s-b+000(${end.lng},${
-    end.lat
-  }),path-2+000(${encodeURIComponent(
-    encodedPolyline,
-  )})/[${boundingBox}]/600x600?padding=${paddingString}&access_token=${
-    process.env.NEXT_PUBLIC_MAPBOX_TOKEN
-  }`
+  const url = `https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/[${boundingBox}]/600x600?padding=${paddingString}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`
 
   return (
     <Image

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../../atoms/Button'
 import { Dialog } from '../../atoms/Dialog'
 import { useFormUid } from '@/components/forms/createUid'
@@ -10,14 +10,22 @@ import {
   CreateAdminDocument,
   namedOperations,
 } from '@/components/network/gql/generated'
+import { useSession } from 'next-auth/react'
 
 export const CreateAdmin = () => {
   const [open, setOpen] = useState(false)
-  const { register, handleSubmit } = useFormUid()
+  const { register, handleSubmit, setValue } = useFormUid()
   const [createAdmin, { data, loading }] = useMutation(CreateAdminDocument, {
     awaitRefetchQueries: true,
     refetchQueries: [namedOperations.Query.admins],
   })
+  const session = useSession()
+  const uid = session.data?.user?.uid
+  useEffect(() => {
+    if (uid) {
+      setValue('uid', uid)
+    }
+  }, [uid])
   return (
     <>
       <Button onClick={() => setOpen(true)}>Create admin</Button>

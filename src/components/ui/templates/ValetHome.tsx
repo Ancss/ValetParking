@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import { Tab, TabPanel, Tabs } from '../molecules/Tabs'
 import { ShowValetAllPickupTrips } from '../organisms/ShowValetAllPickupTrips'
