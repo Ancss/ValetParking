@@ -40,7 +40,7 @@ export const formSchemaBookSlot = z
 
 export type FormTypeBookSlot = z.infer<typeof formSchemaBookSlot>
 
-export const userFormBookSlot = ({
+export const useFormBookSlot = ({
   defaultValues,
 }: {
   defaultValues: DefaultValues<FormTypeBookSlot>
@@ -58,7 +58,7 @@ export const FormProviderBookSlot = ({
   children: ReactNode
   defaultValues: DefaultValues<FormTypeBookSlot>
 }) => {
-  const methods = userFormBookSlot({ defaultValues })
+  const methods = useFormBookSlot({ defaultValues })
 
   return <FormProvider {...methods}>{children}</FormProvider>
 }
