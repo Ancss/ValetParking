@@ -6,7 +6,7 @@ export const GoogleButton = () => {
       onClick={() => {
         signIn('google', { callbackUrl: '/' })
       }}
-      className="text-lg bg-white text-gray-700 hover:shadow-lg px-4 py-2 transition-shadow flex items-center justify-center h-8 border  rounded-md"
+      className="text-lg bg-white w-100 text-gray-700 hover:shadow-lg px-4 py-2 transition-shadow flex items-center justify-center h-12 border  rounded-md"
     >
       Connect with Google
     </button>
