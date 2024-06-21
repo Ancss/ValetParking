@@ -15,7 +15,7 @@ const MAX_AGE = 1 * 24 * 60 * 60 // 1 day in seconds
 
 const secureCookies = process.env.NEXTAUTH_URL?.startsWith('https://')
 const hostName = new URL(process.env.NEXTAUTH_URL || '').hostname
-const rootDomain = 'chichi.com'
+const rootDomain = 'chichi.hair'
 
 export const authOptions: NextAuthOptions = {
   // Configure authentication providers
